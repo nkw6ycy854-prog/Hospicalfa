@@ -1,12 +1,11 @@
 "use client";
 import {
   Bell, Home, LayoutDashboard, Package, ShoppingCart,
-  Layers, Users, DollarSign, Settings, type LucideIcon,
-  ChevronDown,
+  Layers, Users, DollarSign, Settings, ChevronDown,
+  LogOut, type LucideIcon,
 } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
-import { COLORS as C } from "@/lib/data";
-import { ORDERS } from "@/lib/data";
+import { COLORS as C, ORDERS } from "@/lib/data";
 
 export type AdminSection =
   | "dashboard" | "products" | "orders"
@@ -28,16 +27,17 @@ interface AdminLayoutProps {
   section: AdminSection;
   setSection: (s: AdminSection) => void;
   onHome: () => void;
+  onLogout: () => void;
   children: React.ReactNode;
 }
 
-export function AdminLayout({ section, setSection, onHome, children }: AdminLayoutProps) {
-  const pendingAlerts = 4; // stock alerts count
+export function AdminLayout({ section, setSection, onHome, onLogout, children }: AdminLayoutProps) {
+  const pendingAlerts = 4;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100vh", overflow: "hidden" }}>
 
-      {/* ── TOP BAR ──────────────────────────────────────── */}
+      {/* ── TOP BAR ─────────────────────────────────────── */}
       <header style={{
         height: 64, background: C.white,
         borderBottom: `1px solid ${C.border}`,
@@ -48,20 +48,18 @@ export function AdminLayout({ section, setSection, onHome, children }: AdminLayo
       }}>
         <Logo />
 
-        <div style={{
-          flex: 1, display: "flex", justifyContent: "center",
-        }}>
+        <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
           <div style={{
             background: C.bg, border: `1px solid ${C.border}`,
-            borderRadius: 8, padding: "7px 18px",
+            borderRadius: 8, padding: "6px 16px",
             fontSize: 12, color: C.muted, fontWeight: 500,
           }}>
-            Panel Administrativo — Hospicalfa Medical 2026
+            Panel Administrativo · Hospicalfa Medical 2026
           </div>
         </div>
 
         <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-          {/* Notifications */}
+          {/* Bell */}
           <button style={{
             width: 38, height: 38, borderRadius: 9,
             background: C.bg, border: `1px solid ${C.border}`,
@@ -69,18 +67,19 @@ export function AdminLayout({ section, setSection, onHome, children }: AdminLayo
             alignItems: "center", justifyContent: "center",
             position: "relative",
           }}>
-            <Bell size={16} color={C.muted} />
+            <Bell size={16} color={C.muted}/>
             {pendingAlerts > 0 && (
               <span style={{
                 position: "absolute", top: -4, right: -4,
-                background: C.red, color: "#fff", borderRadius: "50%",
-                width: 16, height: 16, fontSize: 9, fontWeight: 700,
+                background: C.red, color: "#fff",
+                borderRadius: "50%", width: 16, height: 16,
+                fontSize: 9, fontWeight: 700,
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}>{pendingAlerts}</span>
             )}
           </button>
 
-          {/* User pill */}
+          {/* User */}
           <div style={{
             display: "flex", alignItems: "center", gap: 10,
             background: C.bg, border: `1px solid ${C.border}`,
@@ -90,21 +89,32 @@ export function AdminLayout({ section, setSection, onHome, children }: AdminLayo
               width: 30, height: 30, borderRadius: 7,
               background: `linear-gradient(135deg,${C.navy},${C.teal})`,
               display: "flex", alignItems: "center",
-              justifyContent: "center", fontSize: 13,
-              fontWeight: 800, color: "#fff",
+              justifyContent: "center", fontSize: 13, fontWeight: 800, color: "#fff",
             }}>A</div>
             <div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: C.txt, lineHeight: 1.1 }}>
-                Administrador
-              </div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: C.txt, lineHeight: 1.1 }}>Administrador</div>
               <div style={{ fontSize: 10, color: C.muted }}>admin@hospicalfa.do</div>
             </div>
-            <ChevronDown size={14} color={C.muted} />
+            <ChevronDown size={14} color={C.muted}/>
           </div>
+
+          {/* Logout */}
+          <button
+            onClick={onLogout}
+            title="Cerrar sesión"
+            style={{
+              width: 38, height: 38, borderRadius: 9,
+              background: "#FEF2F2", border: `1px solid #FECACA`,
+              cursor: "pointer", display: "flex",
+              alignItems: "center", justifyContent: "center",
+            }}
+          >
+            <LogOut size={16} color={C.red}/>
+          </button>
         </div>
       </header>
 
-      {/* ── BODY ROW ─────────────────────────────────────── */}
+      {/* ── BODY ────────────────────────────────────────── */}
       <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
 
         {/* SIDEBAR */}
@@ -127,7 +137,7 @@ export function AdminLayout({ section, setSection, onHome, children }: AdminLayo
             </div>
           </div>
 
-          <nav style={{ padding: "10px 10px", flex: 1 }}>
+          <nav style={{ padding: "10px", flex: 1 }}>
             {NAV_ITEMS.map(({ id, I, label, badge }) => (
               <button
                 key={id}
@@ -135,31 +145,29 @@ export function AdminLayout({ section, setSection, onHome, children }: AdminLayo
                 style={{
                   width: "100%", display: "flex", alignItems: "center", gap: 12,
                   padding: "11px 14px", borderRadius: 10, border: "none",
-                  background: section === id
-                    ? "rgba(13,153,204,0.2)"
-                    : "transparent",
+                  background: section === id ? "rgba(13,153,204,0.2)" : "transparent",
                   color: section === id ? "#38BDF8" : "rgba(255,255,255,0.6)",
                   fontSize: 14, fontWeight: section === id ? 700 : 500,
                   cursor: "pointer", marginBottom: 2, fontFamily: "inherit",
-                  borderLeft: section === id
-                    ? `3px solid ${C.teal}`
-                    : "3px solid transparent",
+                  borderLeft: section === id ? `3px solid ${C.teal}` : "3px solid transparent",
                   transition: "all 0.15s", textAlign: "left",
                 }}
                 onMouseEnter={e => {
                   if (section !== id) {
-                    (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.06)";
-                    (e.currentTarget as HTMLButtonElement).style.color = "#fff";
+                    const el = e.currentTarget as HTMLButtonElement;
+                    el.style.background = "rgba(255,255,255,0.06)";
+                    el.style.color = "#fff";
                   }
                 }}
                 onMouseLeave={e => {
                   if (section !== id) {
-                    (e.currentTarget as HTMLButtonElement).style.background = "transparent";
-                    (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.6)";
+                    const el = e.currentTarget as HTMLButtonElement;
+                    el.style.background = "transparent";
+                    el.style.color = "rgba(255,255,255,0.6)";
                   }
                 }}
               >
-                <I size={17} style={{ flexShrink: 0 }} />
+                <I size={17} style={{ flexShrink: 0 }}/>
                 <span style={{ flex: 1 }}>{label}</span>
                 {badge != null && badge > 0 && (
                   <span style={{
@@ -172,28 +180,38 @@ export function AdminLayout({ section, setSection, onHome, children }: AdminLayo
             ))}
           </nav>
 
-          <div style={{
-            padding: "14px 10px",
-            borderTop: "1px solid rgba(255,255,255,0.07)",
-          }}>
+          <div style={{ padding: "12px 10px", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
             <button
               onClick={onHome}
               style={{
                 width: "100%", display: "flex", alignItems: "center", gap: 12,
                 padding: "10px 14px", borderRadius: 10, border: "none",
                 background: "transparent", color: "rgba(255,255,255,0.35)",
-                fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "inherit",
-                transition: "color 0.15s",
+                fontSize: 13, fontWeight: 500, cursor: "pointer",
+                fontFamily: "inherit", marginBottom: 6,
               }}
               onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
               onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.35)"; }}
             >
-              <Home size={15} /> Ver Sitio Web
+              <Home size={15}/> Ver Sitio Web
+            </button>
+            <button
+              onClick={onLogout}
+              style={{
+                width: "100%", display: "flex", alignItems: "center", gap: 12,
+                padding: "10px 14px", borderRadius: 10, border: "none",
+                background: "transparent", color: "rgba(239,68,68,0.6)",
+                fontSize: 13, fontWeight: 500, cursor: "pointer", fontFamily: "inherit",
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = "#EF4444"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(239,68,68,0.6)"; }}
+            >
+              <LogOut size={15}/> Cerrar Sesión
             </button>
           </div>
         </aside>
 
-        {/* MAIN CONTENT */}
+        {/* MAIN */}
         <main style={{ flex: 1, overflowY: "auto", background: C.bg }}>
           {children}
         </main>
