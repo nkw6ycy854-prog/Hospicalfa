@@ -11,6 +11,9 @@ import { HomePage } from "@/components/public/HomePage";
 import { CatalogPage } from "@/components/public/CatalogPage";
 import { ProductDetailPage } from "@/components/public/ProductDetailPage";
 import { ShippingPage } from "@/components/public/ShippingPage";
+import { BlogPage } from "@/components/public/BlogPage";
+import { ContactPage } from "@/components/public/ContactPage";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { AdminLayout, type AdminSection } from "@/components/admin/AdminLayout";
 import { Dashboard }      from "@/components/admin/Dashboard";
 import { AdminProducts }  from "@/components/admin/AdminProducts";
@@ -25,10 +28,11 @@ import { AdminSettings }  from "@/components/admin/AdminSettings";
 import { AdminProvider }  from "@/lib/adminStore";
 import { COLORS as C, type Product, type CartItem } from "@/lib/data";
 import { cartCount } from "@/lib/utils";
+import { COMPANY } from "@/lib/config";
 import { useCart, useDarkMode, useToast, useAdminAuth, useQuoteModal } from "@/lib/store";
 import { Phone, Mail, MapPin } from "lucide-react";
 
-type PublicPage = "home"|"catalog"|"product"|"shipping"|"about"|"contact";
+type PublicPage = "home"|"catalog"|"product"|"shipping"|"about"|"blog"|"contact";
 
 // Wrap the entire app in AdminProvider so all admin modules share state
 export function HospicalfaPlatform() {
@@ -160,7 +164,7 @@ function PlatformInner() {
         onCartOpen={cart.openCart} onDarkToggle={toggleDark}
       />
 
-      {page==="home"     && <HomePage go={go} addCart={addCart}/>}
+      {page==="home"     && <HomePage go={go} addCart={addCart} onToast={addToast}/>}
       {page==="catalog"  && <CatalogPage go={go} addCart={addCart}/>}
       {page==="product"  && (
         <ProductDetailPage
@@ -170,9 +174,13 @@ function PlatformInner() {
       )}
       {page==="shipping" && <ShippingPage/>}
       {page==="about"    && <AboutPage/>}
-      {page==="contact"  && <ContactPage addToast={addToast}/>}
+      {page==="blog"     && <BlogPage/>}
+      {page==="contact"  && <ContactPage onToast={addToast}/>}
 
       <Footer onNav={go}/>
+
+      {/* Floating WhatsApp button — visible on all public pages */}
+      <WhatsAppButton/>
     </div>
   );
 }
@@ -204,7 +212,7 @@ function AboutPage() {
           ))}
         </div>
         <div style={{background:`linear-gradient(135deg,${C.navy},${C.tealDk})`,borderRadius:20,padding:"44px 56px",display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:24,color:"#fff"}}>
-          {[["15+","Años de experiencia"],["2,000+","Productos disponibles"],["500+","Clientes activos"],["32","Provincias cubiertas"]].map(([v,l],i)=>(
+          {[[`${COMPANY.stats.yearsExperience}+`,"Años de experiencia"],[`${COMPANY.stats.products.toLocaleString()}+`,"Productos disponibles"],[`${COMPANY.stats.activeClients}+`,"Clientes activos"],[`${COMPANY.stats.provincesCovered}`,"Provincias cubiertas"]].map(([v,l],i)=>(
             <div key={i} style={{textAlign:"center"}}>
               <div style={{fontSize:38,fontWeight:800,lineHeight:1}}>{v}</div>
               <div style={{fontSize:13,color:"rgba(255,255,255,0.6)",marginTop:6}}>{l}</div>
@@ -216,96 +224,4 @@ function AboutPage() {
   );
 }
 
-// ── CONTACT ───────────────────────────────────────────────────────────────────
-function ContactPage({ addToast }:{ addToast:(m:string,t?:"success"|"error"|"info"|"warning")=>void }) {
-  const [name,   setName]   = useState("");
-  const [email,  setEmail]  = useState("");
-  const [company,setComp]   = useState("");
-  const [phone,  setPhone]  = useState("");
-  const [msg,    setMsg]    = useState("");
-  const [sending,setSend]   = useState(false);
-
-  const handleSend = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name||!email||!msg) { addToast("Complete los campos requeridos.","error"); return; }
-    if (!/\S+@\S+\.\S+/.test(email)) { addToast("Email inválido.","error"); return; }
-    setSend(true);
-    await new Promise(r=>setTimeout(r,900));
-    setSend(false);
-    setName(""); setEmail(""); setComp(""); setPhone(""); setMsg("");
-    addToast("✅ Mensaje enviado. Le contactaremos en 2–4 horas.","success");
-  };
-
-  const inputStyle:React.CSSProperties = {
-    width:"100%",padding:"11px 14px",borderRadius:10,
-    border:`1px solid ${C.border}`,fontSize:14,
-    color:C.txt,background:C.bg,outline:"none",fontFamily:"inherit",
-  };
-
-  return (
-    <div style={{padding:"60px 60px",background:C.bg,minHeight:"70vh"}}>
-      <div style={{maxWidth:980,margin:"0 auto"}}>
-        <div style={{textAlign:"center",marginBottom:52}}>
-          <div style={{fontSize:64,marginBottom:16}}>📞</div>
-          <h1 style={{fontSize:44,fontWeight:800,color:C.navy,marginBottom:12}}>Contáctenos</h1>
-          <p style={{color:C.muted,fontSize:17,maxWidth:500,margin:"0 auto"}}>
-            Estamos listos para atender su solicitud de productos, cotizaciones o consultas.
-          </p>
-        </div>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:40}}>
-          <div>
-            <h2 style={{fontSize:22,fontWeight:700,color:C.navy,marginBottom:26}}>Información de Contacto</h2>
-            {[{I:Phone,t:"Teléfono",v:"+1 (809) 555-0001"},{I:Mail,t:"Email",v:"ventas@hospicalfa.do"},{I:MapPin,t:"Dirección",v:"Santiago de los Caballeros, RD"}].map(({I,t,v},i)=>(
-              <div key={i} style={{display:"flex",gap:16,marginBottom:26}}>
-                <div style={{width:46,height:46,borderRadius:12,background:C.tealLt,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
-                  <I size={20} color={C.teal}/>
-                </div>
-                <div>
-                  <div style={{fontSize:12,color:C.muted,fontWeight:600,marginBottom:3}}>{t}</div>
-                  <div style={{fontSize:16,fontWeight:600,color:C.txt}}>{v}</div>
-                </div>
-              </div>
-            ))}
-            <div style={{background:C.navyLt,borderRadius:14,padding:"18px 22px"}}>
-              <div style={{fontSize:13,color:C.navy,fontWeight:700,marginBottom:10}}>⏰ Horario de Atención</div>
-              {[["🟢","Lun–Vie: 8:00 AM – 6:00 PM"],["🟢","Sábado: 8:00 AM – 2:00 PM"],["🔴","Domingo: Cerrado"]].map(([dot,h],i)=>(
-                <div key={i} style={{fontSize:14,color:C.muted,marginBottom:6}}>{dot} {h}</div>
-              ))}
-            </div>
-          </div>
-          <form onSubmit={handleSend} noValidate style={{background:C.white,borderRadius:20,border:`1px solid ${C.border}`,padding:"34px"}}>
-            <h2 style={{fontSize:20,fontWeight:700,color:C.navy,marginBottom:22}}>Envíenos un Mensaje</h2>
-            {[
-              {label:"Nombre completo *",     val:name,   set:setName,  type:"text",  ph:"Dr. Juan Martínez"},
-              {label:"Correo electrónico *",  val:email,  set:setEmail, type:"email", ph:"juan@clinica.do"},
-              {label:"Empresa / Institución", val:company,set:setComp,  type:"text",  ph:"Clínica San Rafael"},
-              {label:"Teléfono / WhatsApp",   val:phone,  set:setPhone, type:"tel",   ph:"+1 809 555-0000"},
-            ].map((f,i)=>(
-              <div key={i} style={{marginBottom:14}}>
-                <label style={{fontSize:13,fontWeight:600,color:C.txt,display:"block",marginBottom:6}}>{f.label}</label>
-                <input type={f.type} value={f.val} onChange={e=>f.set(e.target.value)} placeholder={f.ph} style={inputStyle}
-                  onFocus={e=>{(e.target as HTMLInputElement).style.borderColor=C.teal;}}
-                  onBlur={e=>{(e.target as HTMLInputElement).style.borderColor=C.border;}}/>
-              </div>
-            ))}
-            <div style={{marginBottom:20}}>
-              <label style={{fontSize:13,fontWeight:600,color:C.txt,display:"block",marginBottom:6}}>Mensaje *</label>
-              <textarea value={msg} onChange={e=>setMsg(e.target.value)} placeholder="Describa los productos que necesita o su consulta..." rows={4}
-                style={{...inputStyle,resize:"vertical"}}
-                onFocus={e=>{(e.target as HTMLTextAreaElement).style.borderColor=C.teal;}}
-                onBlur={e=>{(e.target as HTMLTextAreaElement).style.borderColor=C.border;}}/>
-            </div>
-            <button type="submit" disabled={sending} style={{
-              width:"100%",background:sending?C.muted:C.navy,color:"#fff",
-              border:"none",borderRadius:12,padding:"14px",fontSize:15,
-              fontWeight:700,cursor:sending?"wait":"pointer",fontFamily:"inherit",
-            }}>
-              {sending?"Enviando...":"📩 Enviar Mensaje"}
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-}
 

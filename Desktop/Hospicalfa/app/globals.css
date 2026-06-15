@@ -137,3 +137,60 @@ tbody tr:hover { background: var(--bg); }
 /* ── RECHARTS ────────────────────────────────────────── */
 .recharts-wrapper { font-family: var(--font-outfit) !important; }
 .recharts-tooltip-wrapper { outline: none !important; }
+
+/* ═══ RESPONSIVE ═══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  section { padding-left: 32px !important; padding-right: 32px !important; }
+}
+
+@media (max-width: 768px) {
+  /* Show mobile menu button, adjust nav */
+  .mobile-menu-btn { display: flex !important; }
+
+  /* Stack grids on mobile */
+  section [style*="grid-template-columns: repeat(4"],
+  section [style*="gridTemplateColumns:\"repeat(4"],
+  section [style*="grid-template-columns:repeat(4"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  section [style*="grid-template-columns: repeat(3"],
+  section [style*="gridTemplateColumns:\"repeat(3"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  h1 { font-size: 32px !important; }
+  h2 { font-size: 26px !important; }
+}
+
+@media (max-width: 480px) {
+  section { padding-left: 20px !important; padding-right: 20px !important; }
+  h1 { font-size: 28px !important; }
+}
+
+/* ═══ PRINT (PDF catalog) ══════════════════════════════════ */
+@media print {
+  nav, footer, button, .overlay { display: none !important; }
+  body { background: #fff !important; }
+}
+
+/* ═══ SPIN ANIMATION ═══════════════════════════════════════ */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ═══ PULSE RING (WhatsApp) ════════════════════════════════ */
+@keyframes pulse-ring {
+  0%   { transform: scale(1);    opacity: 1; }
+  100% { transform: scale(1.4);  opacity: 0; }
+}
+
+/* ═══ REDUCED MOTION (accessibility) ══════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

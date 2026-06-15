@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Block admin area from indexing
+User-agent: *
+Disallow: /admin
+
 Sitemap: https://hospicalfamedical.com/sitemap.xml

@@ -1,9 +1,10 @@
 "use client";
 import { useState, useMemo } from "react";
-import { Search, SlidersHorizontal, Grid, List } from "lucide-react";
+import { Search, Grid, List, Download, FileText, MessageCircle } from "lucide-react";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { ProductCardSkeleton } from "@/components/ui/Skeleton";
 import { COLORS as C, PRODUCTS, CATEGORIES, type Product } from "@/lib/data";
+import { COMPANY } from "@/lib/config";
 
 interface CatalogPageProps {
   go: (page: string, data?: Product) => void;
@@ -40,15 +41,41 @@ export function CatalogPage({ go, addCart }: CatalogPageProps) {
       <div style={{ maxWidth: 1080, margin: "0 auto" }}>
 
         {/* Header */}
-        <div style={{ marginBottom: 28 }}>
-          <h1 style={{ fontSize: 34, fontWeight: 800, color: C.navy, marginBottom: 5 }}>
-            Catálogo de Productos
-          </h1>
-          <p style={{ color: C.muted }}>
-            {filtered.length} de {PRODUCTS.length} productos
-            {cat !== "Todas" && ` en ${cat}`}
-            {search && ` para "${search}"`}
-          </p>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 28, gap: 20, flexWrap: "wrap" }}>
+          <div>
+            <h1 style={{ fontSize: 34, fontWeight: 800, color: C.navy, marginBottom: 5 }}>
+              Catálogo de Productos
+            </h1>
+            <p style={{ color: C.muted }}>
+              {filtered.length} de {PRODUCTS.length} productos
+              {cat !== "Todas" && ` en ${cat}`}
+              {search && ` para "${search}"`}
+            </p>
+          </div>
+          <div style={{ display: "flex", gap: 10 }}>
+            <button
+              onClick={() => window.print()}
+              style={{
+                display: "flex", alignItems: "center", gap: 7, padding: "11px 18px",
+                borderRadius: 10, border: `1px solid ${C.border}`, background: C.white,
+                fontSize: 13, fontWeight: 700, cursor: "pointer", color: C.navy, fontFamily: "inherit",
+              }}
+            >
+              <Download size={15}/> Descargar Catálogo PDF
+            </button>
+            <a
+              href={`https://wa.me/${COMPANY.whatsapp}`}
+              target="_blank" rel="noopener noreferrer"
+              style={{
+                display: "flex", alignItems: "center", gap: 7, padding: "11px 18px",
+                borderRadius: 10, border: "none", background: "#25D366",
+                fontSize: 13, fontWeight: 700, cursor: "pointer", color: "#fff",
+                textDecoration: "none",
+              }}
+            >
+              <MessageCircle size={15}/> Cotizar por WhatsApp
+            </a>
+          </div>
         </div>
 
         {/* Search + controls row */}
