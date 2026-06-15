@@ -52,7 +52,7 @@ export function AdminWebsite() {
                 background:C.greenLt, color:C.green,
                 padding:"7px 14px", borderRadius:8, fontSize:12, fontWeight:700,
               }}>
-                ✓ Guardado
+                Guardado
               </span>
             )}
             <button onClick={save} disabled={saving} style={{
@@ -129,7 +129,7 @@ export function AdminWebsite() {
                   background:C.teal, borderRadius:8, padding:"8px 16px",
                   fontSize:12, fontWeight:700,
                 }}>
-                  📦 {content.hero.ctaText}
+                  {content.hero.ctaText}
                 </div>
               </div>
 
@@ -305,7 +305,7 @@ export function AdminWebsite() {
                   },
                   {
                     label:"Modo Mantenimiento",
-                    desc:"⚠ Los visitantes verán un mensaje de mantenimiento. Solo admins pueden entrar.",
+                    desc:"Los visitantes verán un mensaje de mantenimiento. Solo admins pueden entrar.",
                     field:"maintenanceMode",
                     val:content.maintenanceMode,
                   },
@@ -370,7 +370,7 @@ export function AdminWebsite() {
                       background:C.tealLt, borderRadius:9, padding:"10px 16px",
                       fontSize:13, color:C.tealDk, fontWeight:600,
                     }}>
-                      🎉 Envío gratis en pedidos ≥ RD${content.freeShippingThreshold.toLocaleString()}
+                      Envío gratis en pedidos ≥ RD${content.freeShippingThreshold.toLocaleString()}
                     </div>
                   </div>
                 </div>
@@ -386,7 +386,7 @@ export function AdminWebsite() {
                 borderRadius:10, fontSize:13, fontWeight:700,
                 display:"flex", alignItems:"center", gap:6,
               }}>
-                ✓ Cambios publicados
+                Cambios publicados
               </span>
             )}
             <button onClick={save} disabled={saving} style={{

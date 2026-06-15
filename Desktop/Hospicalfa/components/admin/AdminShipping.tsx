@@ -73,7 +73,7 @@ export function AdminShipping() {
 
         {/* GLOBAL SETTINGS */}
         <div style={{background:C.white,borderRadius:14,border:`1px solid ${C.border}`,padding:"22px 24px",marginBottom:20}}>
-          <h3 style={{fontSize:16,fontWeight:700,color:C.navy,marginBottom:16}}>⚙ Configuración Global de Envíos</h3>
+          <h3 style={{fontSize:16,fontWeight:700,color:C.navy,marginBottom:16}}>Configuración Global de Envíos</h3>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:16,alignItems:"end"}}>
             <div>
               <label style={{fontSize:12,fontWeight:600,color:C.txt,display:"block",marginBottom:6}}>
@@ -91,7 +91,7 @@ export function AdminShipping() {
             <div>
               <div style={{fontSize:12,color:C.muted,marginBottom:6}}>Vista previa</div>
               <div style={{background:C.tealLt,borderRadius:9,padding:"10px 14px",fontSize:13,color:C.tealDk,fontWeight:600}}>
-                🎉 Gratis en pedidos ≥ {fmt(globalFreeThreshold)}
+                Gratis en pedidos ≥ {fmt(globalFreeThreshold)}
               </div>
             </div>
             <button onClick={saveGlobal} disabled={savingGlobal} style={{
@@ -130,7 +130,7 @@ export function AdminShipping() {
                 <span style={{fontSize:13,fontWeight:600,color:C.txt}}>{p.name}</span>
               </div>
               <div style={{fontSize:14,fontWeight:700,color:p.rate===0?C.green:C.navy}}>
-                {p.rate===0?"🎁 Gratis":fmt(p.rate)}
+                {p.rate===0?"Gratis":fmt(p.rate)}
               </div>
               <div style={{fontSize:13,color:C.muted,display:"flex",alignItems:"center",gap:4}}>
                 <Truck size={12}/> {p.delivery}–{p.delivery+1}d
@@ -180,7 +180,7 @@ export function AdminShipping() {
               <div style={{background:C.white,borderRadius:8,padding:"10px 12px"}}>
                 <div style={{fontSize:10,color:C.muted,marginBottom:3}}>ESTÁNDAR</div>
                 <div style={{fontSize:16,fontWeight:800,color:editing.rate===0?C.green:C.navy}}>
-                  {editing.rate===0?"🎁 GRATIS":fmt(Number(editing.rate))}
+                  {editing.rate===0?"GRATIS":fmt(Number(editing.rate))}
                 </div>
                 <div style={{fontSize:11,color:C.muted}}>{editing.delivery}–{Number(editing.delivery)+1} días hábiles</div>
               </div>

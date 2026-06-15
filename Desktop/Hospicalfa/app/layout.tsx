@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | Hospicalfa Medical",
   },
   description:
-    "Distribuidores líderes de insumos y equipamiento médico en República Dominicana. Más de 2,000 productos certificados para hospitales, clínicas y farmacias. Entrega en las 32 provincias. ☎ (809) 555-0001",
+    "Distribuidores líderes de insumos y equipamiento médico en República Dominicana. Más de 2,000 productos certificados para hospitales, clínicas y farmacias. Entrega en las 32 provincias. Tel: (809) 555-0001",
   keywords: [
     "insumos médicos República Dominicana",
     "equipamiento médico RD",

@@ -32,7 +32,7 @@ export function WhatsAppButton() {
           color: "#1A202C", whiteSpace: "nowrap", position: "relative",
           animation: "fadeIn 0.3s ease",
         }}>
-          💬 ¿Necesita ayuda? Chateemos
+          ¿Necesita ayuda? Chateemos
           <button
             onClick={() => setTooltip(false)}
             aria-label="Cerrar"

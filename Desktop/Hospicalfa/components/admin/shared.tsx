@@ -184,7 +184,7 @@ export function ConfirmDialog({
         width:"min(420px, 95vw)",zIndex:460,padding:"28px 28px",
       }}>
         <div style={{fontSize:40,marginBottom:14,textAlign:"center"}}>
-          {danger?"⚠️":"❓"}
+          {danger?"!":"?"}
         </div>
         <h3 style={{fontSize:18,fontWeight:800,color:C.navy,textAlign:"center",marginBottom:8}}>
           {title}

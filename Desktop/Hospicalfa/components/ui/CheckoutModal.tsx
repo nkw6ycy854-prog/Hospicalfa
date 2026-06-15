@@ -113,10 +113,10 @@ export function CheckoutModal({ isOpen, items, onClose, onSuccess }: CheckoutMod
           {/* Header */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
             <h2 style={{ fontSize: 20, fontWeight: 800, color: C.navy }}>
-              {step === "shipping" ? "🚚 Datos de Envío"
-                : step === "payment" ? "💳 Método de Pago"
-                : step === "confirm" ? "✅ Confirmar Pedido"
-                : "🎉 Pedido Confirmado"}
+              {step === "shipping" ? "Datos de Envío"
+                : step === "payment" ? "Método de Pago"
+                : step === "confirm" ? "Confirmar Pedido"
+                : "Pedido Confirmado"}
             </h2>
             {step !== "success" && (
               <button onClick={handleClose} style={{ background: C.bg, border: "none", borderRadius: 8, width: 34, height: 34, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -182,7 +182,7 @@ export function CheckoutModal({ isOpen, items, onClose, onSuccess }: CheckoutMod
           {step === "payment" && (
             <>
               <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
-                {([["transferencia","🏦 Transferencia"],["tarjeta","💳 Tarjeta"],["efectivo","💵 Efectivo"]] as const).map(([v, l]) => (
+                {([["transferencia","Transferencia"],["tarjeta","Tarjeta"],["efectivo","Efectivo"]] as const).map(([v, l]) => (
                   <button key={v} onClick={() => setPay(v)} style={{
                     flex: 1, padding: "11px 8px", borderRadius: 10, cursor: "pointer",
                     background: payMethod === v ? C.navy : C.white,
@@ -273,7 +273,7 @@ export function CheckoutModal({ isOpen, items, onClose, onSuccess }: CheckoutMod
               <div style={{ display: "flex", gap: 10 }}>
                 <button onClick={() => setStep("payment")} style={{ flex: 1, padding: "12px", background: C.white, border: `1.5px solid ${C.border}`, borderRadius: 12, fontSize: 14, fontWeight: 600, cursor: "pointer", color: C.txt, fontFamily: "inherit" }}>← Atrás</button>
                 <button onClick={handlePlace} disabled={processing} style={{ flex: 2, padding: "12px", background: processing ? C.muted : C.green, color: "#fff", border: "none", borderRadius: 12, fontSize: 14, fontWeight: 700, cursor: processing ? "wait" : "pointer", fontFamily: "inherit" }}>
-                  {processing ? "Procesando..." : "✅ Confirmar Pedido"}
+                  {processing ? "Procesando..." : "Confirmar Pedido"}
                 </button>
               </div>
             </>

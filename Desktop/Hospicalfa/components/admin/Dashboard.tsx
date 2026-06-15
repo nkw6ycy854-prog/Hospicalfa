@@ -83,10 +83,10 @@ export function Dashboard() {
         {/* KPI SECONDARY */}
         <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:14,marginBottom:22}}>
           {[
-            {l:"Pedidos Activos",   v:activeOrders,           c:C.teal,  icon:"🛍️"},
-            {l:"Stock Crítico",     v:criticalStock,           c:C.red,   icon:"⚠️"},
-            {l:"Valor Inventario",  v:fmt(totalStockVal),      c:C.navy,  icon:"📦"},
-            {l:"Ticket Promedio",   v:"RD$2,632",              c:C.green, icon:"💳"},
+            {l:"Pedidos Activos",   v:activeOrders,           c:C.teal,  icon:""},
+            {l:"Stock Crítico",     v:criticalStock,           c:C.red,   icon:""},
+            {l:"Valor Inventario",  v:fmt(totalStockVal),      c:C.navy,  icon:""},
+            {l:"Ticket Promedio",   v:"RD$2,632",              c:C.green, icon:""},
           ].map((s,i)=>(
             <div key={i} style={{
               background:C.white,borderRadius:12,padding:"15px 18px",
@@ -204,7 +204,7 @@ export function Dashboard() {
           {/* Live stock alerts */}
           <div style={{background:C.white,borderRadius:16,border:`1px solid ${C.border}`,overflow:"hidden"}}>
             <div style={{padding:"18px 22px",borderBottom:`1px solid ${C.border}`,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-              <h3 style={{fontSize:16,fontWeight:700,color:C.navy}}>⚠ Alertas de Stock</h3>
+              <h3 style={{fontSize:16,fontWeight:700,color:C.navy}}>Alertas de Stock</h3>
               <span style={{background:"#FEE2E2",color:C.red,fontSize:11,fontWeight:700,padding:"2px 8px",borderRadius:10}}>
                 {state.products.filter(p=>p.stock<=40).length}
               </span>
@@ -237,13 +237,13 @@ export function Dashboard() {
                     <span style={{
                       fontSize:10,fontWeight:700,marginLeft:10,flexShrink:0,
                       color:p.stock<20?C.red:"#92400E",
-                    }}>{p.stock<20?"🔴 CRÍTICO":"🟡 BAJO"}</span>
+                    }}>{p.stock<20?"CRÍTICO":"BAJO"}</span>
                   </div>
                 </div>
               ))}
               {state.products.filter(p=>p.stock<=40).length===0&&(
                 <div style={{textAlign:"center",padding:"24px",color:C.green,fontWeight:600,fontSize:14}}>
-                  ✅ Todo el inventario en niveles normales
+                  Todo el inventario en niveles normales
                 </div>
               )}
             </div>

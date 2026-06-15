@@ -68,14 +68,14 @@ function PlatformInner() {
 
   const addCart = useCallback((product: Product, qty=1) => {
     cart.addItem(product, qty);
-    addToast(`✓ ${product.name} añadido al carrito`, "success");
+    addToast(`${product.name} añadido al carrito`, "success");
   }, [cart, addToast]);
 
   const handleLogin = useCallback((user: string, pass: string): boolean => {
     const ok = login(user, pass);
     if (ok) {
       setShowLogin(false); setIsAdmin(true); setAdminSection("orders");
-      addToast("✅ Acceso concedido — Bienvenido al panel", "success");
+      addToast("Acceso concedido — Bienvenido al panel", "success");
     }
     return ok;
   }, [login, addToast]);
@@ -92,7 +92,7 @@ function PlatformInner() {
 
   const handleOrderSuccess = useCallback((orderNum: string) => {
     cart.clearCart(); setShowCheckout(false);
-    addToast(`🎉 Pedido ${orderNum} confirmado con éxito`, "success");
+    addToast(`Pedido ${orderNum} confirmado con éxito`, "success");
   }, [cart, addToast]);
 
   // ── ADMIN LOGIN ────────────────────────────────────────────────────────────
@@ -144,7 +144,7 @@ function PlatformInner() {
       <QuoteModal
         isOpen={quote.isOpen}  items={quote.prefillItems}
         onClose={quote.closeQuote}
-        onSuccess={()=>addToast("📋 Cotización enviada. Le contactaremos pronto.","success")}
+        onSuccess={()=>addToast("Cotización enviada. Le contactaremos pronto.","success")}
       />
 
       <CheckoutModal
@@ -185,7 +185,7 @@ function AboutPage() {
     <div style={{padding:"72px 60px",background:C.bg,minHeight:"70vh"}}>
       <div style={{maxWidth:980,margin:"0 auto"}}>
         <div style={{textAlign:"center",marginBottom:60}}>
-          <div style={{fontSize:72,marginBottom:20}}>🏥</div>
+          <div style={{fontSize:72,marginBottom:20}}></div>
           <h1 style={{fontSize:44,fontWeight:800,color:C.navy,marginBottom:14}}>Sobre Hospicalfa Medical</h1>
           <p style={{color:C.muted,fontSize:17,lineHeight:1.75,maxWidth:600,margin:"0 auto"}}>
             Empresa dominicana especializada en distribución y venta de insumos y equipamiento médico certificado desde 2010.
@@ -193,10 +193,10 @@ function AboutPage() {
         </div>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20,marginBottom:40}}>
           {[
-            {i:"🎯",t:"Nuestra Misión",   d:"Proveer insumos y equipamiento médico de alta calidad a todas las instituciones de salud de la República Dominicana, garantizando productos certificados a precios competitivos."},
-            {i:"🌟",t:"Nuestra Visión",   d:"Ser la empresa líder en distribución de insumos médicos en el Caribe, reconocida por excelencia en servicio, calidad y compromiso con la salud dominicana."},
-            {i:"⚖️",t:"Nuestros Valores", d:"Integridad, calidad, compromiso y servicio al cliente. Operamos con transparencia y los más altos estándares éticos del sector salud."},
-            {i:"📖",t:"Nuestra Historia", d:"Fundada en 2010 en Santiago. Hemos crecido de distribuidora local a empresa con cobertura nacional y más de 500 clientes institucionales activos."},
+            {i:"",t:"Nuestra Misión",   d:"Proveer insumos y equipamiento médico de alta calidad a todas las instituciones de salud de la República Dominicana, garantizando productos certificados a precios competitivos."},
+            {i:"",t:"Nuestra Visión",   d:"Ser la empresa líder en distribución de insumos médicos en el Caribe, reconocida por excelencia en servicio, calidad y compromiso con la salud dominicana."},
+            {i:"",t:"Nuestros Valores", d:"Integridad, calidad, compromiso y servicio al cliente. Operamos con transparencia y los más altos estándares éticos del sector salud."},
+            {i:"",t:"Nuestra Historia", d:"Fundada en 2010 en Santiago. Hemos crecido de distribuidora local a empresa con cobertura nacional y más de 500 clientes institucionales activos."},
           ].map((item,i)=>(
             <div key={i} style={{background:C.white,borderRadius:16,border:`1px solid ${C.border}`,padding:"28px",boxShadow:"0 1px 4px rgba(0,0,0,0.04)"}}>
               <div style={{fontSize:36,marginBottom:14}}>{item.i}</div>

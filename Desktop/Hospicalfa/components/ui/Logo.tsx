@@ -18,7 +18,7 @@ export function Logo({ white = false, size = "md" }: LogoProps) {
         border: white ? "1px solid rgba(255,255,255,0.28)" : `1px solid ${C.navyLt}`,
         display: "flex", alignItems: "center", justifyContent: "center",
         fontSize: iconSize * 0.52, flexShrink: 0,
-      }}>⚕️</div>
+      }}>+</div>
       <div>
         <div style={{
           fontSize, fontWeight: 800, letterSpacing: "0.4px",

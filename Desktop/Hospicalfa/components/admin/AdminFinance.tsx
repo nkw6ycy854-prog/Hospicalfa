@@ -147,7 +147,7 @@ export function AdminFinance() {
           {/* Top customers */}
           <div style={{background:C.white,borderRadius:16,border:`1px solid ${C.border}`,overflow:"hidden"}}>
             <div style={{padding:"18px 20px",borderBottom:`1px solid ${C.border}`}}>
-              <h3 style={{fontSize:15,fontWeight:700,color:C.navy}}>🏆 Top Clientes</h3>
+              <h3 style={{fontSize:15,fontWeight:700,color:C.navy}}>Top Clientes</h3>
             </div>
             {topCustomers.map((c,i)=>(
               <div key={i} style={{

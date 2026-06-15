@@ -95,7 +95,7 @@ export function CartDrawer({
           {items.length === 0 ? (
             /* Empty state */
             <div style={{ textAlign: "center", paddingTop: 72 }}>
-              <div style={{ fontSize: 72, marginBottom: 18, opacity: 0.6 }}>🛒</div>
+              <div style={{ fontSize: 72, marginBottom: 18, opacity: 0.6 }}></div>
               <p style={{ fontWeight: 700, color: C.navy, fontSize: 17, marginBottom: 8 }}>
                 Su carrito está vacío
               </p>
@@ -192,7 +192,7 @@ export function CartDrawer({
               <MapPin size={13} color={C.teal} style={{ flexShrink: 0 }}/>
               {shipping === 0 ? (
                 <span style={{ color: C.green, fontWeight: 700 }}>
-                  🎉 ¡Envío gratuito incluido en su pedido!
+                  ¡Envío gratuito incluido en su pedido!
                 </span>
               ) : (
                 <span style={{ color: C.muted }}>
@@ -259,7 +259,7 @@ export function CartDrawer({
             </button>
 
             <p style={{ textAlign: "center", fontSize: 11, color: C.muted, marginTop: 10 }}>
-              🔒 Datos protegidos · SSL · Respuesta en 2–4h hábiles
+              Datos protegidos · SSL · Respuesta en 2–4h hábiles
             </p>
           </div>
         )}

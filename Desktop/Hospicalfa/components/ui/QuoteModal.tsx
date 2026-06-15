@@ -243,10 +243,10 @@ export function QuoteModal({ isOpen, items, onClose, onSuccess }: QuoteModalProp
               </label>
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                 {[
-                  { v: "transferencia", l: "🏦 Transferencia"  },
-                  { v: "efectivo",      l: "💵 Efectivo"       },
-                  { v: "tarjeta",       l: "💳 Tarjeta"        },
-                  { v: "cheque",        l: "📄 Cheque"         },
+                  { v: "transferencia", l: "Transferencia"  },
+                  { v: "efectivo",      l: "Efectivo"       },
+                  { v: "tarjeta",       l: "Tarjeta"        },
+                  { v: "cheque",        l: "Cheque"         },
                 ].map(opt => (
                   <button
                     key={opt.v}

@@ -14,11 +14,11 @@ const CATEGORIES = [
   {v:"Catéteres",   l:"Catéteres"},
   {v:"Equipamiento",l:"Equipamiento"},
 ];
-const ICONS = ["🧤","😷","💉","🩺","📊","🩹","🌡️","🔬","🏥","🥼","💊","🧻","⚕️","🔭","💊","🩻"];
+const ICONS = ["","","","","","","","","","","","","","","",""];
 
 const EMPTY: AdminProduct = {
   id:0, name:"", cat:"Protección", price:0, stock:0, sku:"",
-  feat:false, rating:5.0, reviews:0, icon:"⚕️",
+  feat:false, rating:5.0, reviews:0, icon:"",
   description:"", specs:[],
   active:true, costPrice:0, supplier:"", notes:"", lastUpdated:"",
 };
