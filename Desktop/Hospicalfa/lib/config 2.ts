@@ -21,8 +21,8 @@ export const COMPANY = {
   sanitaryLicense:   "MSP-2024-0987",          // Licencia Ministerio de Salud Pública
 
   // ── Contacto ───────────────────────────────────────────────────────────
-  phone:        "+1 (829) 819-9602",
-  phoneRaw:     "8298199602",                 // Para enlaces tel: y WhatsApp
+  phone:        "+1 (809) 555-0001",
+  phoneRaw:     "18095550001",                 // Para enlaces tel: y WhatsApp
   phoneSecondary:"+1 (809) 555-0002",
   whatsapp:     "18095550001",
   email:        "ventas@hospicalfa.do",
@@ -76,7 +76,16 @@ export const CERTIFICATIONS = [
 ];
 
 // ── Marcas distribuidas (texto estilizado, sin logos con copyright) ───────
-
+export const BRANDS = [
+  { name:"3M",        category:"Protección respiratoria", color:"#E60012" },
+  { name:"Abbott",    category:"Diagnóstico",             color:"#00529B" },
+  { name:"BD",        category:"Inyectables",             color:"#CC0000" },
+  { name:"Medtronic", category:"Equipamiento",            color:"#1010EB" },
+  { name:"B. Braun",  category:"Soluciones IV",           color:"#00A859" },
+  { name:"Cardinal",  category:"Insumos quirúrgicos",     color:"#C8102E" },
+  { name:"Welch Allyn",category:"Diagnóstico clínico",    color:"#003C71" },
+  { name:"Omron",     category:"Monitoreo de salud",      color:"#0066B3" },
+];
 
 // ── Equipo de trabajo ─────────────────────────────────────────────────────
 export const TEAM = [
