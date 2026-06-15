@@ -1,17 +1,17 @@
 "use client";
 import {
-  Bell, Home, LayoutDashboard, Package, ShoppingCart,
+  Bell, Home, Package, ShoppingCart,
   Layers, Users, DollarSign, Settings, ChevronDown,
-  LogOut, Globe, Truck, Shield, type LucideIcon,
+  LogOut, Shield, type LucideIcon,
 } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { COLORS as C } from "@/lib/data";
 import { useAdmin } from "@/lib/adminStore";
 
 export type AdminSection =
-  | "dashboard" | "orders"    | "products"
+  | "orders"    | "products"
   | "inventory" | "customers" | "finance"
-  | "shipping"  | "users"     | "website"  | "settings";
+  | "users"     | "settings";
 
 interface NavGroup {
   label: string;
@@ -36,7 +36,6 @@ export function AdminLayout({ section, setSection, onHome, onLogout, children }:
     {
       label:"Operaciones",
       items:[
-        { id:"dashboard", I:LayoutDashboard, label:"Dashboard"    },
         { id:"orders",    I:ShoppingCart,    label:"Pedidos",      badge:pendingOrders  },
         { id:"customers", I:Users,           label:"Clientes",     badge:blockedClients||undefined },
         { id:"finance",   I:DollarSign,      label:"Finanzas"      },
@@ -52,9 +51,7 @@ export function AdminLayout({ section, setSection, onHome, onLogout, children }:
     {
       label:"Configuración",
       items:[
-        { id:"shipping",  I:Truck,   label:"Tarifas Envío"},
         { id:"users",     I:Shield,  label:"Usuarios"     },
-        { id:"website",   I:Globe,   label:"Sitio Web"    },
         { id:"settings",  I:Settings,label:"Ajustes"      },
       ],
     },

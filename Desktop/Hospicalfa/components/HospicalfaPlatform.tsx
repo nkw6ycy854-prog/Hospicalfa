@@ -15,15 +15,12 @@ import { BlogPage } from "@/components/public/BlogPage";
 import { ContactPage } from "@/components/public/ContactPage";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { AdminLayout, type AdminSection } from "@/components/admin/AdminLayout";
-import { Dashboard }      from "@/components/admin/Dashboard";
 import { AdminProducts }  from "@/components/admin/AdminProducts";
 import { AdminOrders }    from "@/components/admin/AdminOrders";
 import { AdminInventory } from "@/components/admin/AdminInventory";
 import { AdminCustomers } from "@/components/admin/AdminCustomers";
 import { AdminFinance }   from "@/components/admin/AdminFinance";
-import { AdminShipping }  from "@/components/admin/AdminShipping";
 import { AdminUsers }     from "@/components/admin/AdminUsers";
-import { AdminWebsite }   from "@/components/admin/AdminWebsite";
 import { AdminSettings }  from "@/components/admin/AdminSettings";
 import { AdminProvider }  from "@/lib/adminStore";
 import { COLORS as C, type Product, type CartItem } from "@/lib/data";
@@ -47,7 +44,7 @@ function PlatformInner() {
   const [page,        setPage]        = useState<PublicPage>("home");
   const [isAdmin,     setIsAdmin]     = useState(false);
   const [showLogin,   setShowLogin]   = useState(false);
-  const [adminSection,setAdminSection]= useState<AdminSection>("dashboard");
+  const [adminSection,setAdminSection]= useState<AdminSection>("orders");
   const [selProduct,  setSelProduct]  = useState<Product|null>(null);
   const [showCheckout,setShowCheckout]= useState(false);
 
@@ -59,7 +56,7 @@ function PlatformInner() {
 
   const go = useCallback((to: string, data?: Product) => {
     if (to==="admin") {
-      if (authenticated) { setIsAdmin(true); setAdminSection("dashboard"); }
+      if (authenticated) { setIsAdmin(true); setAdminSection("orders"); }
       else { setShowLogin(true); }
       return;
     }
@@ -77,7 +74,7 @@ function PlatformInner() {
   const handleLogin = useCallback((user: string, pass: string): boolean => {
     const ok = login(user, pass);
     if (ok) {
-      setShowLogin(false); setIsAdmin(true); setAdminSection("dashboard");
+      setShowLogin(false); setIsAdmin(true); setAdminSection("orders");
       addToast("✅ Acceso concedido — Bienvenido al panel", "success");
     }
     return ok;
@@ -119,15 +116,12 @@ function PlatformInner() {
           onHome={()=>{ setIsAdmin(false); setPage("home"); }}
           onLogout={handleLogout}
         >
-          {adminSection==="dashboard"  && <Dashboard/>}
           {adminSection==="orders"     && <AdminOrders/>}
           {adminSection==="products"   && <AdminProducts/>}
           {adminSection==="inventory"  && <AdminInventory/>}
           {adminSection==="customers"  && <AdminCustomers/>}
           {adminSection==="finance"    && <AdminFinance/>}
-          {adminSection==="shipping"   && <AdminShipping/>}
           {adminSection==="users"      && <AdminUsers/>}
-          {adminSection==="website"    && <AdminWebsite/>}
           {adminSection==="settings"   && <AdminSettings/>}
         </AdminLayout>
       </>

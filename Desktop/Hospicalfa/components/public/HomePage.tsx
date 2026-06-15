@@ -4,8 +4,7 @@ import { ProductCard } from "@/components/ui/ProductCard";
 import { COLORS as C, PRODUCTS, CATEGORY_CARDS, type Product } from "@/lib/data";
 import { COMPANY } from "@/lib/config";
 import {
-  TrustStats, BrandsSection, CertificationsSection, FacilitiesSection,
-  TeamSection, CoverageSection, CaseStudiesSection, TestimonialsSection,
+  TrustStats, CoverageSection,
 } from "./CredibilitySections";
 import { QuickQuoteSection } from "./QuickQuoteSection";
 
@@ -180,29 +179,11 @@ export function HomePage({ go, addCart, onToast }: HomePageProps) {
         </div>
       </section>
 
-      {/* ═══ BRANDS ═════════════════════════════════════════ */}
-      <BrandsSection/>
-
-      {/* ═══ CERTIFICATIONS ═════════════════════════════════ */}
-      <CertificationsSection/>
-
-      {/* ═══ FACILITIES ═════════════════════════════════════ */}
-      <FacilitiesSection/>
-
       {/* ═══ QUICK QUOTE CTA ════════════════════════════════ */}
       <QuickQuoteSection onToast={onToast}/>
 
       {/* ═══ COVERAGE ═══════════════════════════════════════ */}
       <CoverageSection/>
-
-      {/* ═══ CASE STUDIES ═══════════════════════════════════ */}
-      <CaseStudiesSection/>
-
-      {/* ═══ TEAM ═══════════════════════════════════════════ */}
-      <TeamSection/>
-
-      {/* ═══ TESTIMONIALS ═══════════════════════════════════ */}
-      <TestimonialsSection/>
 
       {/* ═══ FINAL CTA BANNER ═══════════════════════════════ */}
       <section style={{ padding: "56px 60px", background: C.tealLt, borderTop: `1px solid ${C.border}` }}>
